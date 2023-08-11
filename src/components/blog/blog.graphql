@@ -1,0 +1,50 @@
+scalar Date
+
+type Blog {
+  _id: ID
+  title: String
+  text: String
+  createDateTime: Date
+  lastChangedDateTime: Date
+  authorId: String
+}
+
+input createBlogInput {
+  title: String
+  text: String
+  authorId: String
+}
+
+input updateBlogInput {
+  title: String
+  text: String
+}
+
+input filterBlogsInput {
+  page: Int
+  limit: Int
+  title: String!
+  authorId: String!
+}
+
+type filterBlogsRes {
+  items: [Blog],
+  currentPage: Int,
+  totalItems: Int,
+  totalPages: Int,
+}
+
+type deleteBlogRes {
+  message: String,
+}
+
+type Query {
+  filterBlogs(input: filterBlogsInput): filterBlogsRes
+  getBlogById(id: ID): Blog
+}
+
+type Mutation {
+  createBlog(input: createBlogInput): Blog
+  updateBlog(id: ID, input: updateBlogInput): Blog
+  deleteBlog(id: ID): deleteBlogRes
+}

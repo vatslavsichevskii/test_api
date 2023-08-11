@@ -1,0 +1,50 @@
+scalar Date
+
+type Post {
+  _id: ID
+  title: String
+  text: String
+  createDateTime: Date
+  lastChangedDateTime: Date
+  blogId: String
+}
+
+input createPostInput {
+  title: String
+  text: String
+  blogId: String
+}
+
+input updatePostInput {
+  title: String
+  text: String
+}
+
+input filterPostsInput {
+  page: Int
+  limit: Int
+  title: String
+  blogId: String
+}
+
+type filterPostsRes {
+  items: [Post],
+  currentPage: Int,
+  totalItems: Int,
+  totalPages: Int,
+}
+
+type deletePostRes {
+  message: String,
+}
+
+type Query {
+  filterPosts(input: filterPostsInput): filterPostsRes
+  getPostById(id: ID): Post
+}
+
+type Mutation {
+  createPost(input: createPostInput): Post
+  updatePost(id: ID, input: updatePostInput): Post
+  deletePost(id: ID): deletePostRes
+}

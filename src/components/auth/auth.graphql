@@ -1,0 +1,32 @@
+scalar Date
+
+type loginRes {
+  accessToken: String
+  user: User
+}
+
+type User {
+  _id: ID
+  name: String
+  email: String
+  role: String
+  createDateTime: Date
+  lastChangedDateTime: Date
+}
+
+input loginInput {
+  email: String
+  password: String
+}
+
+input registerInput {
+  name: String
+  email: String
+  password: String
+  role: String
+}
+
+type Mutation {
+  login(input: loginInput): loginRes
+  register(input: registerInput): User
+}
